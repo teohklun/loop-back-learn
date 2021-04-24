@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  test-database:
+    container_name: test-database
+    image: mongo:latest
+    ports:
+      - "27050:27017"
+    volumes:
+      - test_database:/data/db
+      - ./src/Docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "admin"
+      MONGO_INITDB_ROOT_PASSWORD: "admin"
+      MONGO_INITDB_DATABASE: "test-database"
+volumes:
+  test_database:
