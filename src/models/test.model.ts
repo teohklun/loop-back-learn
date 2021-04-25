@@ -13,7 +13,6 @@ export class Test extends Entity {
   })
   id: string;
 
-
   constructor(data?: Partial<Test>) {
     super(data);
   }

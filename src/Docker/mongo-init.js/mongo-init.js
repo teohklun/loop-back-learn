@@ -10,17 +10,17 @@ db.createUser({
   ],
 });
 // eslint-disable-next-line no-undef
-db.Testing.insert([
+db.Test.insert([
   {
     _id: 'aaa',
-    someText: "adasdasd"
+    someText: 'adasdasd',
   },
   {
     _id: 'bbb',
-    someText: "adasdasd"
+    someText: 'adasdasd',
   },
   {
     _id: 'ccc',
-    someText: "adasdasd"
+    someText: 'adasdasd',
   },
 ]);

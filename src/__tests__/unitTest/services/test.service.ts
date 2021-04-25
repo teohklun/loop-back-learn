@@ -1,29 +1,47 @@
+import {Client, expect} from '@loopback/testlab';
+// import * as path from 'path';
+// import qs from 'qs';
+// import * as url from 'url';
+// import {StarterApplication} from '../../../application';
+import {StarterApplication} from '../../../application';
+import {setupApplication2} from './test-helper1';
 
-// describe('createTodo', () => {
-//   it('creates a Todo', async () => {
-//     const create = todoRepo.stubs.create;
-//     create.resolves(aTodoWithId);
-//     const result = await controller.createTodo(aTodo);
-//     expect(result).to.eql(aTodoWithId);
-//     sinon.assert.calledWith(create, aTodo);
-//   });
+describe('big test', () => {
+  let app: StarterApplication;
+  let client: Client;
+  // let test: Test;
+  // before(givenRunningApplicationWithCustomConfiguration);
 
-//   it('resolves remindAtAddress to a geocode', async () => {
-//     const create = todoRepo.stubs.create;
-//     geocode.resolves([aLocation.geopoint]);
+  before('setupApplication', async () => {
+    ({app, client} = await setupApplication2());
+  });
 
-//     const input = givenTodo({remindAtAddress: aLocation.address});
+  after(async () => {
+    await app.stop();
+  });
 
-//     const expected = new Todo(input);
-//     Object.assign(expected, {
-//       remindAtAddress: aLocation.address,
-//       remindAtGeo: aLocation.geostring,
-//     });
-//     create.resolves(expected);
+  // it('exposes a default home page', async () => {
+  //   await client
+  //     .get('/')
+  //     .expect(200)
+  //     .expect('Content-Type', /text\/html/);
+  // });
 
-//     const result = await controller.createTodo(input);
+  it('small test 1', async () => {
+    const response = await client.get('/tests/count').expect(200);
 
-//     expect(result).to.eql(expected);
-//     sinon.assert.calledWith(create, input);
-//   });
-// });
+    console.log(response.body);
+    expect(response.body).to.be.an.Object();
+    // expect(response.body).equal({"count": 0});
+    // expect(response.body[0]).to.match(/Hello, Raymond/);
+  });
+
+  // async function givenRunningApplicationWithCustomConfiguration() {
+  //   app = new StarterApplication({
+  //     rest: givenHttpServerConfig(),
+  //   });
+
+  //   // Start Application
+  //   await app.main();
+  // }
+});

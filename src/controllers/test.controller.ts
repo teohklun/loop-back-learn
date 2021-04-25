@@ -7,13 +7,13 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
@@ -23,7 +23,7 @@ import {TestRepository} from '../repositories';
 export class TestController {
   constructor(
     @repository(TestRepository)
-    public testRepository : TestRepository,
+    public testRepository: TestRepository,
   ) {}
 
   @post('/tests')
@@ -50,11 +50,9 @@ export class TestController {
   @get('/tests/count')
   @response(200, {
     description: 'Test model count',
-    content: {'application/json': {schema: CountSchema}},
+    // content: {'application/json': {schema: CountSchema}},
   })
-  async count(
-    @param.where(Test) where?: Where<Test>,
-  ): Promise<Count> {
+  async count(@param.where(Test) where?: Where<Test>): Promise<Count> {
     return this.testRepository.count(where);
   }
 
@@ -70,9 +68,7 @@ export class TestController {
       },
     },
   })
-  async find(
-    @param.filter(Test) filter?: Filter<Test>,
-  ): Promise<Test[]> {
+  async find(@param.filter(Test) filter?: Filter<Test>): Promise<Test[]> {
     return this.testRepository.find(filter);
   }
 
@@ -106,7 +102,7 @@ export class TestController {
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Test, {exclude: 'where'}) filter?: FilterExcludingWhere<Test>
+    @param.filter(Test, {exclude: 'where'}) filter?: FilterExcludingWhere<Test>,
   ): Promise<Test> {
     return this.testRepository.findById(id, filter);
   }

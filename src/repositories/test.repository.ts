@@ -8,9 +8,7 @@ export class TestRepository extends DefaultCrudRepository<
   typeof Test.prototype.id,
   TestRelations
 > {
-  constructor(
-    @inject('datasources.testds') dataSource: TestdsDataSource,
-  ) {
+  constructor(@inject('datasources.testds') dataSource: TestdsDataSource) {
     super(Test, dataSource);
   }
 }
